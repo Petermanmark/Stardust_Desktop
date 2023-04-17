@@ -23,5 +23,27 @@ namespace Test
         {
             InitializeComponent();
         }
+
+        private void OnLoginButtonClicked(object sender, RoutedEventArgs e)
+        {
+            // Get the entered username and password
+            string username = UsernameTextBox.Text.ToString();
+            string password = PasswordBox.Password.ToString();
+
+            // Perform the login check (replace with your own authentication logic)
+            bool isLoginSuccessful = false; // replace this with your own authentication logic
+            if (isLoginSuccessful)
+            {
+                // Redirect the user to the main window
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+                Close();
+            }
+            else
+            {
+                // Display an error message
+                ErrorMessageTextBlock.Text = "Invalid username or password.";
+            }
+        }
     }
 }
