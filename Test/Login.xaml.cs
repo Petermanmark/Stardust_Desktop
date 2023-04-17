@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -99,8 +100,16 @@ namespace Test
                 // If the response was successful, return the success message
                 if (response.IsSuccessStatusCode)
                 {
-                    var result = await response.Content.ReadAsStringAsync();
-                    return result;
+                    var jsonString = await response.Content.ReadAsStringAsync();
+                    JObject jsonObject = JObject.Parse(jsonString);
+                    var accessToken = (string)jsonObject["access_token"];
+
+                    Token token = new Token();
+                    token.Authorization = "Bearer " + accessToken;
+
+                    Trace.WriteLine("token: "+token.ToString());
+
+                    return "Login Successful\n"+token.ToString();
                 }
                 else
                 {
