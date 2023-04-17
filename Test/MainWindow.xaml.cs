@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using OxyPlot;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,41 +30,78 @@ namespace Test
         public MainWindow()
         {
             InitializeComponent();
-            Loaded += MainWindow_Loaded;
-        }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            // Create the JSON content for the Adaptive Card
-            var cardJson = @"
+            // Define a list of card data
+            List<CardData> cardDataList = new List<CardData>()
             {
-                ""$schema"": ""http://adaptivecards.io/schemas/adaptive-card.json"",
-                ""type"": ""AdaptiveCard"",
-                ""version"": ""1.0"",
-                ""body"": [
-                    {
-                        ""type"": ""TextBlock"",
-                        ""text"": ""Title of the card"",
-                        ""weight"": ""bolder"",
-                        ""size"": ""medium""
-                    },
-                    {
-                        ""type"": ""TextBlock"",
-                        ""text"": ""Content of the card"",
-                        ""wrap"": true
-                    }
-                ]
-            }";
+                new CardData("Title 1", "Content 1"),
+                new CardData("Title 2", "Content 2"),
+                new CardData("Title 3", "Content 3"),
+                new CardData("Title 4", "Content 4")
+            };
 
-            // Parse the JSON content into an AdaptiveCard object
-            var card = AdaptiveCard.FromJson(cardJson).Card;
+            foreach (CardData cardData in cardDataList)
+            {
+                string title = "Title of the card";
+                string content = "Content of the card";
+                // Create the JSON content for the Adaptive Card
+                var cardJson = $@"
+                {{
+                    ""$schema"": ""http://adaptivecards.io/schemas/adaptive-card.json"",
+                    ""type"": ""AdaptiveCard"",
+                    ""version"": ""1.0"",
+                    ""body"": [
+                        {{
+                            ""type"": ""TextBlock"",
+                            ""text"": ""{title}"",
+                            ""weight"": ""bolder"",
+                            ""size"": ""medium""
+                        }},
+                        {{
+                            ""type"": ""TextBlock"",
+                            ""text"": ""{content}"",
+                            ""wrap"": true
+                        }}
+                    ]
+                }}";
 
-            // Render the Adaptive Card into a WPF container
+                // Parse JSON string into Adaptive Card object
+                AdaptiveCard card = AdaptiveCard.FromJson(cardJson).Card;
+
+                // Render Adaptive Card object in a WPF container
+                FrameworkElement renderedCard = Render(card);
+
+                // Add rendered card to StackPanel
+                MainGrid.Children.Add(renderedCard);
+                Trace.WriteLine("Card added");
+            }
+        }
+        private FrameworkElement Render(AdaptiveCard card)
+        {
+            // Create a renderer
             var renderer = new AdaptiveCardRenderer();
-            var uiElement = renderer.RenderCard(card).FrameworkElement;
 
-            // Add the Adaptive Card to the window
-            MainGrid.Children.Add(uiElement);
+            // Render the card
+            var renderedCard = renderer.RenderCard(card);
+
+            // Get the WPF container
+            var container = renderedCard.FrameworkElement;
+
+            // Set the container width to the desired width
+            container.Width = MainGrid.Width;
+
+            return container;
+        }
+        private class CardData
+        {
+            public string Title { get; set; }
+            public string Content { get; set; }
+
+            public CardData(string title, string content)
+            {
+                Title = title;
+                Content = content;
+            }
         }
 
     }
