@@ -37,61 +37,65 @@ namespace Test
                 new CardData("Title 1", "Content 1"),
                 new CardData("Title 2", "Content 2"),
                 new CardData("Title 3", "Content 3"),
+                new CardData("Title 1", "Content 1"),
+                new CardData("Title 2", "Content 2"),
+                new CardData("Title 3", "Content 3"),
+                new CardData("Title 1", "Content 1"),
+                new CardData("Title 2", "Content 2"),
+                new CardData("Title 3", "Content 3"),
+                new CardData("Title 1", "Content 1"),
+                new CardData("Title 2", "Content 2"),
+                new CardData("Title 3", "Content 3"),
+                new CardData("Title 1", "Content 1"),
+                new CardData("Title 2", "Content 2"),
+                new CardData("Title 3", "Content 3"),
+                new CardData("Title 1", "Content 1"),
+                new CardData("Title 2", "Content 2"),
+                new CardData("Title 3", "Content 3"),
                 new CardData("Title 4", "Content 4")
             };
 
             foreach (CardData cardData in cardDataList)
             {
-                string title = "Title of the card";
-                string content = "Content of the card";
-                // Create the JSON content for the Adaptive Card
-                var cardJson = $@"
-                {{
-                    ""$schema"": ""http://adaptivecards.io/schemas/adaptive-card.json"",
-                    ""type"": ""AdaptiveCard"",
-                    ""version"": ""1.0"",
-                    ""body"": [
-                        {{
-                            ""type"": ""TextBlock"",
-                            ""text"": ""{title}"",
-                            ""weight"": ""bolder"",
-                            ""size"": ""medium""
-                        }},
-                        {{
-                            ""type"": ""TextBlock"",
-                            ""text"": ""{content}"",
-                            ""wrap"": true
-                        }}
-                    ]
-                }}";
+                string title = cardData.Title;
+                string content = cardData.Content;
 
-                // Parse JSON string into Adaptive Card object
-                AdaptiveCard card = AdaptiveCard.FromJson(cardJson).Card;
+                // Create a StackPanel control with vertical orientation
+                stackPanel.Orientation = Orientation.Vertical;
 
-                // Render Adaptive Card object in a WPF container
-                FrameworkElement renderedCard = Render(card);
+                // Create the first card
+                Border card = new Border();
+                card.BorderBrush = System.Windows.Media.Brushes.Black;
+                card.BorderThickness = new Thickness(1);
+                card.Margin = new Thickness(5);
 
-                // Add rendered card to StackPanel
-                MainGrid.Children.Add(renderedCard);
+                Grid gridCard = new Grid();
+                gridCard.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+                gridCard.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
+
+                TextBlock titleCard = new TextBlock();
+                titleCard.Text = title;
+                titleCard.FontSize = 18;
+                titleCard.FontWeight = System.Windows.FontWeights.Bold;
+                titleCard.Margin = new Thickness(5);
+                Grid.SetRow(titleCard, 0);
+                Grid.SetColumn(titleCard, 1);
+                gridCard.Children.Add(titleCard);
+
+                TextBlock contentCard = new TextBlock();
+                contentCard.Text = content;
+                contentCard.Margin = new Thickness(5);
+                Grid.SetRow(contentCard, 1);
+                Grid.SetColumn(contentCard, 1);
+                gridCard.Children.Add(contentCard);
+
+                card.Child = gridCard;
+                stackPanel.Children.Add(card);
+
                 Trace.WriteLine("Card added");
             }
         }
-        private FrameworkElement Render(AdaptiveCard card)
-        {
-            // Create a renderer
-            var renderer = new AdaptiveCardRenderer();
-
-            // Render the card
-            var renderedCard = renderer.RenderCard(card);
-
-            // Get the WPF container
-            var container = renderedCard.FrameworkElement;
-
-            // Set the container width to the desired width
-            container.Width = MainGrid.Width;
-
-            return container;
-        }
+       
         private class CardData
         {
             public string Title { get; set; }
