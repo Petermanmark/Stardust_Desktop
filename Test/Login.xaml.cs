@@ -100,16 +100,18 @@ namespace Test
                 // If the response was successful, return the success message
                 if (response.IsSuccessStatusCode)
                 {
-                    var jsonString = await response.Content.ReadAsStringAsync();
+                    string jsonString = await response.Content.ReadAsStringAsync();
                     JObject jsonObject = JObject.Parse(jsonString);
-                    var accessToken = (string)jsonObject["access_token"];
+                    string accessToken = (string)jsonObject["access_token"];
+                    Trace.WriteLine(accessToken);
 
                     Token token = new Token();
                     token.Authorization = "Bearer " + accessToken;
+                    var jwtToken = JsonConvert.SerializeObject(token);
 
-                    Trace.WriteLine("token: "+token.ToString());
+                    Trace.WriteLine(jwtToken);
 
-                    return "Login Successful\n"+token.ToString();
+                    return "Login Successful";
                 }
                 else
                 {
