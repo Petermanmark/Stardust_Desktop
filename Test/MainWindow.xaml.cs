@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Azure.Cosmos.Serialization.HybridRow.RecordIO;
+using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
 using System.Net.Http;
@@ -40,7 +41,10 @@ namespace Test
 
         private void newGod(object sender, RoutedEventArgs e)
         {
-            // Add code here to handle the "Open" menu item click event
+            newGod();
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
         }
 
         private void profile(object sender, RoutedEventArgs e)
@@ -168,6 +172,24 @@ namespace Test
                 }
             }
         }
-
+        public void newGod()
+        {
+            // create HTTP client instance
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Token.accessToken);
+            // create HTTP request message
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:3000/notes/god");
+            // send HTTP request
+            HttpResponseMessage response = client.SendAsync(request).Result;
+            // check if HTTP response was successful
+            if (response.IsSuccessStatusCode)
+            {               
+                Trace.WriteLine($"{response.StatusCode}");
+            }
+            else
+            {
+                Trace.WriteLine($"{response.StatusCode}");
+            }
+        }
     }
 }

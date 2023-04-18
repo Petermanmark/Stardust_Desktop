@@ -25,8 +25,8 @@ namespace Test
         }
         private void OK_Click(object sender, RoutedEventArgs e)
         {
-            string text1 = textBox1.Text;
-            string text2 = textBox2.Text;
+            string title = textBox1.Text;
+            string content = textBox2.Text;
             // Pass the values back to the parent window here
             this.DialogResult = true;
         }
