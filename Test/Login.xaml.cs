@@ -29,7 +29,12 @@ namespace Test
         {
             InitializeComponent();
         }
-
+        private void Register(object sender, RoutedEventArgs e)
+        {
+            var registernb = new Register(); //create your new form.
+            registernb.Show(); //show the new form.
+            this.Close(); //only if you want to close the current form.
+        }
         private async void OnLoginButtonClicked(object sender, RoutedEventArgs e)
         {
             // Get the entered username and password

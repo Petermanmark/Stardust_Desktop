@@ -26,6 +26,9 @@
 
         <Button Grid.Row="4" Content="Register" Click="OnRegisterButtonClicked" Margin="20"/>
 
+        <Button Grid.Row="5" Content="Back to login phase" Click="Back" Margin="20"/>
+
+
         <Label Grid.Row="5" x:Name="ResultLabel" FontSize="16" HorizontalAlignment="Center" Margin="0,20,0,20"/>
     </Grid>
 </Window>

@@ -25,5 +25,6 @@
         <PasswordBox Grid.Row="2" Grid.Column="1" Name="PasswordBox" Margin="10"/>
         <Button Grid.Row="3" Grid.Column="1" Content="Login" Margin="10" Click="OnLoginButtonClicked"/>
         <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Name="ErrorMessageTextBlock" Foreground="Red" Margin="10"/>
+        <Button Grid.Row="5" Grid.Column="3" Content="Register you're account" Margin="10" Click="Register"/>
     </Grid>
 </Window>

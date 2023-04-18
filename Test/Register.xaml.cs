@@ -18,7 +18,12 @@ namespace Test
         {
             InitializeComponent();
         }
-
+        private void Back(object sender, RoutedEventArgs e)
+        {
+            var loginb = new Login(); //create your new form.
+            loginb.Show(); //show the new form.
+            this.Close(); //only if you want to close the current form.
+        }
         private async void OnRegisterButtonClicked(object sender, RoutedEventArgs e)
         {
             // Get the entered email and password
