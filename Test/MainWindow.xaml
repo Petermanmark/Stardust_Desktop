@@ -6,9 +6,26 @@
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <ScrollViewer>
-            <StackPanel x:Name="stackPanel" Orientation="Vertical"/>
-        </ScrollViewer>
-    </Grid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open"/>
+                <MenuItem Header="_Save"/>
+                <MenuItem Header="_Exit"/>
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Cut"/>
+                <MenuItem Header="_Copy"/>
+                <MenuItem Header="_Paste"/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_About"/>
+            </MenuItem>
+        </Menu>
+        <Grid>
+            <ScrollViewer>
+                <StackPanel x:Name="stackPanel" Orientation="Vertical"/>
+            </ScrollViewer>
+        </Grid>
+    </DockPanel>
 </Window>
