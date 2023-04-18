@@ -21,6 +21,41 @@ namespace Test
             getNotes(stackPanel);
         }
 
+        private void newNote(object sender, RoutedEventArgs e)
+        {
+            newNoteDialog dialog = new newNoteDialog();
+            bool? result = dialog.ShowDialog();
+            if (result == true)
+            {
+                // The user clicked the "OK" button
+                string text1 = dialog.textBox1.Text;
+                string text2 = dialog.textBox2.Text;
+                // Do something with the values here
+            }
+            else
+            {
+                // The user clicked the "Cancel" button or closed the dialog box
+            }
+        }
+
+        private void newGod(object sender, RoutedEventArgs e)
+        {
+            // Add code here to handle the "Open" menu item click event
+        }
+
+        private void profile(object sender, RoutedEventArgs e)
+        {
+            // Add code here to handle the "Open" menu item click event
+        }
+
+        private void logout(object sender, RoutedEventArgs e)
+        {
+            Token.accessToken = "";
+            var login = new Login();
+            login.Show();
+            this.Close();
+        }
+
         static async void getNotes(StackPanel stackPanel)
         {
 
