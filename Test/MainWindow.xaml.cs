@@ -44,8 +44,6 @@ namespace Test
             newGod();
             stackPanel.Children.Clear();
             getNotes(stackPanel);
-
-
         }
 
         private void profile(object sender, RoutedEventArgs e)
