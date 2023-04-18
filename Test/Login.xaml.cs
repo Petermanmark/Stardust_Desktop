@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Azure.Storage.Blobs.Models;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -102,14 +103,7 @@ namespace Test
                 {
                     string jsonString = await response.Content.ReadAsStringAsync();
                     JObject jsonObject = JObject.Parse(jsonString);
-                    string accessToken = (string)jsonObject["access_token"];
-                    Trace.WriteLine(accessToken);
-
-                    Token token = new Token();
-                    token.Authorization = "Bearer " + accessToken;
-                    var jwtToken = JsonConvert.SerializeObject(token);
-
-                    Trace.WriteLine(jwtToken);
+                    Token.accessToken = (string)jsonObject["access_token"];
 
                     return "Login Successful";
                 }

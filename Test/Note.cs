@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Test
 {
-    public static class Token
+    class Note
     {
-        public static string accessToken { get; set; }
+        public string noteId;
+        public string title;
+        public string content;
     }
 }
