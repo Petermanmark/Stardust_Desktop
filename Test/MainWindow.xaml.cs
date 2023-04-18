@@ -39,12 +39,13 @@ namespace Test
             }
         }
 
-        private void newGod(object sender, RoutedEventArgs e)
+        void newGod(object sender, RoutedEventArgs e)
         {
             newGod();
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
+            stackPanel.Children.Clear();
+            getNotes(stackPanel);
+
+
         }
 
         private void profile(object sender, RoutedEventArgs e)
