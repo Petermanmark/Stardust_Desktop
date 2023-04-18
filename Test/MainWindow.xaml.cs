@@ -34,18 +34,6 @@ namespace Test
             getNotes(stackPanel);
 
         }
-       
-        private class CardData
-        {
-            public string Title { get; set; }
-            public string Content { get; set; }
-
-            public CardData(string title, string content)
-            {
-                Title = title;
-                Content = content;
-            }
-        }
 
         static async void getNotes(StackPanel stackPanel)
         {
@@ -63,17 +51,21 @@ namespace Test
                     string json = await response.Content.ReadAsStringAsync();
                     dynamic data = JsonConvert.DeserializeObject(json);
 
+                    // Define the stack panel that will contain the cards
+                    stackPanel.Margin = new Thickness(10);
+
                     // Assume that the API data is an array of objects with "name" property
                     foreach (dynamic item in data)
                     {
 
-                        // Define a list of card data
+                        // Define the card data
                         string noteId = item.noteId;
                         string title = item.title;
                         string content = item.content;
 
-                        // Create the first card
+                        // Create the card
                         Border card = new Border();
+                        card.MaxWidth = 800;
                         card.BorderBrush = System.Windows.Media.Brushes.Black;
                         card.BorderThickness = new Thickness(1);
                         card.Margin = new Thickness(5);
@@ -84,26 +76,44 @@ namespace Test
 
                         TextBlock titleCard = new TextBlock();
                         titleCard.Text = title;
-                        titleCard.FontSize = 18;
+                        titleCard.FontSize = 30;
+                        titleCard.MaxWidth = 500;
                         titleCard.FontWeight = System.Windows.FontWeights.Bold;
                         titleCard.Margin = new Thickness(5);
+                        titleCard.TextWrapping = TextWrapping.Wrap;
                         Grid.SetRow(titleCard, 0);
                         Grid.SetColumn(titleCard, 1);
-                        gridCard.Children.Add(titleCard);
 
                         TextBlock contentCard = new TextBlock();
                         contentCard.Text = content;
+                        contentCard.FontSize = 20;
+                        contentCard.MaxWidth = 500;
                         contentCard.Margin = new Thickness(5);
+                        contentCard.TextWrapping = TextWrapping.Wrap;
                         Grid.SetRow(contentCard, 1);
                         Grid.SetColumn(contentCard, 1);
-                        gridCard.Children.Add(contentCard);
+
+                        // Wrap the TextBlocks in a Viewbox to make them responsive
+                        Viewbox titleViewbox = new Viewbox();
+                        titleViewbox.Child = titleCard;
+
+                        Viewbox contentViewbox = new Viewbox();
+                        contentViewbox.Child = contentCard;
+
+                        // Add the Viewboxes to the grid
+                        Grid.SetRow(titleViewbox, 0);
+                        Grid.SetColumn(titleViewbox, 1);
+                        gridCard.Children.Add(titleViewbox);
+
+                        Grid.SetRow(contentViewbox, 1);
+                        Grid.SetColumn(contentViewbox, 1);
+                        gridCard.Children.Add(contentViewbox);
 
                         card.Child = gridCard;
                         stackPanel.Children.Add(card);
 
                         Trace.WriteLine("Card added");
                     }
-
                 }
 
                 else

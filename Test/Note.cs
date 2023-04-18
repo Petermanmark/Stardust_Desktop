@@ -11,5 +11,12 @@ namespace Test
         public string noteId;
         public string title;
         public string content;
+
+        public Note(string noteId, string title, string content)
+        {
+            this.noteId = noteId;
+            this.title = title;
+            this.content = content;
+        }
     }
 }
