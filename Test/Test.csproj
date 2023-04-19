@@ -12,10 +12,14 @@
     <PackageReference Include="AdaptiveCards.Rendering.Wpf" Version="2.7.3" />
     <PackageReference Include="AdaptiveCards.Rendering.Wpf.Xceed" Version="2.7.3" />
     <PackageReference Include="AdaptiveCards.Templating" Version="1.4.0" />
+    <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
+    <PackageReference Include="MahApps.Metro.IconPacks.FontAwesome" Version="4.11.0" />
     <PackageReference Include="MaterialDesignColors" Version="2.1.2" />
     <PackageReference Include="MaterialDesignThemes" Version="4.8.0" />
+    <PackageReference Include="Meziantou.WpfFontAwesome" Version="5.15.4" />
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.5" />
     <PackageReference Include="Microsoft.Bot.Components.AdaptiveCards" Version="1.4.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="OxyPlot.Core" Version="2.1.2" />
     <PackageReference Include="WPF-UI" Version="2.0.3" />

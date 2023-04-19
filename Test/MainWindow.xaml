@@ -13,18 +13,23 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}">
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem x:Name="emailTextWin" Header="_email">
+            <MenuItem x:Name="emailTextWin" Header="_email" HorizontalAlignment="Left">
                 <MenuItem x:Name="registerTextWin" Header="_Register:"/>
                 <MenuItem Header="_Kijelentkezés" Click="logout"/>
             </MenuItem>
-            <MenuItem Header="_Létrehozás">
+            
+            <MenuItem Header="_Létrehozás" HorizontalAlignment="Left">
                 <MenuItem Header="_Új jegyzet" Click="newNote"/>
                 <MenuItem Header="_Új generálása" Click="newGod"/>
             </MenuItem>
             
+            <MenuItem x:Name="minimalize" Click="minimalizeApp" Header="__" HorizontalAlignment="Right" Width="Auto"/>
+            <MenuItem x:Name="closeInMenu" Click="closeApp" Header="_×" HorizontalAlignment="Right" Width="Auto"/>
         </Menu>
         <Grid>
             <ScrollViewer>

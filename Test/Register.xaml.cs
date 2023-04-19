@@ -19,6 +19,10 @@ namespace Test
             InitializeComponent();
             this.ResizeMode = ResizeMode.NoResize;
         }
+        private void closeApp(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
         private void Back(object sender, RoutedEventArgs e)
         {
             var loginb = new Login(); //create your new form.

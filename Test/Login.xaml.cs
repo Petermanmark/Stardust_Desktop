@@ -30,6 +30,11 @@ namespace Test
             InitializeComponent();
             this.ResizeMode = ResizeMode.NoResize;
         }
+        private void closeApp(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
         private void toRegister(object sender, RoutedEventArgs e)
         {
             var registernb = new Register(); //create your new form.
@@ -120,6 +125,11 @@ namespace Test
                     throw new Exception(error);
                 }
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

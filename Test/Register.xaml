@@ -13,7 +13,9 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}">
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -36,7 +38,6 @@
 
         <Button Grid.Row="5" Content="Back to login phase" Click="Back" Margin="10"/>
 
-
-        <Label Grid.Row="5" x:Name="ResultLabel" FontSize="16" HorizontalAlignment="Center" Margin="0,20,0,20"/>
+        <Button Content="×" Click="closeApp" BorderBrush="Transparent" HorizontalAlignment="Left" Margin="513,6,0,0" Width="26" Height="26" VerticalAlignment="Top" RenderTransformOrigin="0.697,0.5"/>
     </Grid>
 </Window>
