@@ -1,6 +1,8 @@
 ﻿using MaterialDesignThemes.Wpf;
+using Microsoft.Azure.Cosmos.Linq;
 using Microsoft.Azure.Cosmos.Serialization.HybridRow.RecordIO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
 using System.Net.Http;
@@ -62,7 +64,7 @@ namespace Test
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:3000");
-                client.DefaultRequestHeaders.Add("Authorization", "Bearer "+Token.accessToken);
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Token.accessToken);
                 var response = await client.GetAsync("/notes");
 
                 // If the response was successful, return the success message
@@ -72,7 +74,7 @@ namespace Test
                     dynamic data = JsonConvert.DeserializeObject(json);
 
                     // Define the stack panel that will contain the cards
-                    stackPanel.Margin = new Thickness(10);;
+                    stackPanel.Margin = new Thickness(10); ;
 
                     // Assume that the API data is an array of objects with "name" property
                     foreach (dynamic item in data)
@@ -220,9 +222,9 @@ namespace Test
                     DateTime registartionDate = data.registartionDate;
 
                     emailTextWin.Header = email;
-                    registerTextWin.Header = "Regisztráció:\n"+registartionDate;
+                    registerTextWin.Header = "Regisztráció:\n" + registartionDate;
 
-                    }
+                }
 
                 else
                 {
@@ -283,7 +285,7 @@ namespace Test
             HttpClient client = new HttpClient();
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Token.accessToken);
             // create HTTP request message
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, "http://localhost:3000/notes/"+noteId);
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, "http://localhost:3000/notes/" + noteId);
             // send HTTP request
             HttpResponseMessage response = client.SendAsync(request).Result;
             // check if HTTP response was successful
@@ -296,7 +298,7 @@ namespace Test
                 Trace.WriteLine($"{response.StatusCode}");
             }
         }
-        
+
         //EZ BAD REQUESTET DOB
         public void editNote(string noteId, string title, string content)
         {
@@ -306,11 +308,16 @@ namespace Test
             // create HTTP request message
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Patch, "http://localhost:3000/notes/" + noteId);
             // create a JSON object with the data to update
-            var updateData = new
+            JObject updateData = new JObject();
+            if (!string.IsNullOrEmpty(title))
             {
-                title = title,
-                content = content
-            };          
+                updateData.Add("title", title);
+            }
+
+            if (!string.IsNullOrEmpty(content))
+            {
+                updateData.Add("content", content);
+            }
             var json = JsonConvert.SerializeObject(updateData);
             // set the request content to a JSON payload
             request.Content = new StringContent(json, Encoding.UTF8, "application/json");
