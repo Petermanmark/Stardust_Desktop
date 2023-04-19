@@ -5,17 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
+            <MenuItem x:Name="emailTextWin" Header="_email">
+                <MenuItem x:Name="registerTextWin" Header="_Register:"/>
+                <MenuItem Header="_Kijelentkezés" Click="logout"/>
+            </MenuItem>
             <MenuItem Header="_Létrehozás">
                 <MenuItem Header="_Új jegyzet" Click="newNote"/>
                 <MenuItem Header="_Új generálása" Click="newGod"/>
             </MenuItem>
-            <MenuItem Header="_Profil">
-                <MenuItem Header="_Profil" Click="profile"/>
-                <MenuItem Header="_Kijelentkezés" Click="profile"/>
-            </MenuItem>
+            
         </Menu>
         <Grid>
             <ScrollViewer>

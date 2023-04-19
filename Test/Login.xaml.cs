@@ -28,8 +28,9 @@ namespace Test
         public Login()
         {
             InitializeComponent();
+            this.ResizeMode = ResizeMode.NoResize;
         }
-        private void Register(object sender, RoutedEventArgs e)
+        private void toRegister(object sender, RoutedEventArgs e)
         {
             var registernb = new Register(); //create your new form.
             registernb.Show(); //show the new form.

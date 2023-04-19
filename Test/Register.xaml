@@ -5,7 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
-        Title="Registration" Height="350" Width="525">
+        Title="Registration" Height="300" Width="545"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -24,9 +32,9 @@
         <Label Grid.Row="3" Content="Password:" VerticalAlignment="Center" Margin="5"/>
         <PasswordBox Grid.Row="3" x:Name="PasswordBox" Margin="100,0,20,0"/>
 
-        <Button Grid.Row="4" Content="Register" Click="OnRegisterButtonClicked" Margin="20"/>
+        <Button Grid.Row="4" Content="Register" Click="OnRegisterButtonClicked" Margin="10"/>
 
-        <Button Grid.Row="5" Content="Back to login phase" Click="Back" Margin="20"/>
+        <Button Grid.Row="5" Content="Back to login phase" Click="Back" Margin="10"/>
 
 
         <Label Grid.Row="5" x:Name="ResultLabel" FontSize="16" HorizontalAlignment="Center" Margin="0,20,0,20"/>

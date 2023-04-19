@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.Cosmos.Serialization.HybridRow.RecordIO;
+﻿using MaterialDesignThemes.Wpf;
+using Microsoft.Azure.Cosmos.Serialization.HybridRow.RecordIO;
 using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
@@ -20,9 +21,9 @@ namespace Test
             InitializeComponent();
             //this.WindowState = WindowState.Maximized;
             this.ResizeMode = ResizeMode.NoResize;
+            getProfile(emailTextWin, registerTextWin);
             getNotes(stackPanel);
         }
-
         private void newNote(object sender, RoutedEventArgs e)
         {
             newNoteDialog dialog = new newNoteDialog();
@@ -42,19 +43,12 @@ namespace Test
                 // The user clicked the "Cancel" button or closed the dialog box
             }
         }
-
         void newGod(object sender, RoutedEventArgs e)
         {
             newGodPost();
             stackPanel.Children.Clear();
             getNotes(stackPanel);
         }
-
-        private void profile(object sender, RoutedEventArgs e)
-        {
-            // Add code here to handle the "Open" menu item click event
-        }
-
         private void logout(object sender, RoutedEventArgs e)
         {
             Token.accessToken = "";
@@ -62,10 +56,8 @@ namespace Test
             login.Show();
             this.Close();
         }
-
-        static async void getNotes(StackPanel stackPanel)
+        public async void getNotes(StackPanel stackPanel)
         {
-
             // Create an HTTP client object
             using (HttpClient client = new HttpClient())
             {
@@ -92,7 +84,7 @@ namespace Test
                         string content = item.content;
 
                         // Create the card
-                        Border card = new Border();
+                        Card card = new Card();
                         card.BorderBrush = System.Windows.Media.Brushes.Black;
                         card.BorderThickness = new Thickness(1);
                         card.Margin = new Thickness(5);
@@ -113,6 +105,7 @@ namespace Test
                         Grid.SetColumn(titleCard, 1);
 
                         TextBlock contentCard = new TextBlock();
+
                         contentCard.Text = content;
                         contentCard.FontSize = 16;
                         contentCard.Margin = new Thickness(5);
@@ -150,20 +143,86 @@ namespace Test
                         // Create the buttons and add them to the StackPanel
                         Button editButton = new Button();
                         editButton.Content = "Edit";
+                        editButton.Tag = noteId;
                         editButton.Margin = new Thickness(5);
+                        editButton.Click += EditButton_Click;
                         buttonPanel.Children.Add(editButton);
+                        void EditButton_Click(object sender, RoutedEventArgs e)
+                        {
+                            // retrieve the note ID from the Tag property of the button
+                            string noteId = (string)((Button)sender).Tag;
+                            newNoteDialog dialog = new newNoteDialog();
+                            bool? result = dialog.ShowDialog();
+                            if (result == true)
+                            {
+                                // The user clicked the "OK" button
+                                string text1 = dialog.textBox1.Text;
+                                string text2 = dialog.textBox2.Text;
+                                // Do something with the values here
+                                editNote(noteId, text1, text2);
+                                stackPanel.Children.Clear();
+                                getNotes(stackPanel);
+                            }
+                            else
+                            {
+                                // The user clicked the "Cancel" button or closed the dialog box
+                            }
+
+                        }
 
                         Button deleteButton = new Button();
                         deleteButton.Content = "Delete";
+                        deleteButton.Tag = noteId;
+                        deleteButton.Click += DeleteButton_Click;
                         deleteButton.Margin = new Thickness(5);
                         buttonPanel.Children.Add(deleteButton);
+                        void DeleteButton_Click(object sender, RoutedEventArgs e)
+                        {
+                            // retrieve the note ID from the Tag property of the button
+                            string noteId = (string)((Button)sender).Tag;
+                            deleteNote(noteId);
+                            stackPanel.Children.Clear();
+                            getNotes(stackPanel);
+
+                        }
 
                         gridCard.Children.Add(buttonPanel);
 
-                        card.Child = gridCard;
+                        card.Content = gridCard;
                         stackPanel.Children.Add(card);
                     }
                 }
+
+                else
+                {
+                    // If the response was not successful, throw an exception with the error message
+                    var error = await response.Content.ReadAsStringAsync();
+                    throw new Exception(error);
+                }
+            }
+        }
+        public async void getProfile(MenuItem emailTextWin, MenuItem registerTextWin)
+        {
+            // Create an HTTP client object
+            using (HttpClient client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:3000");
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Token.accessToken);
+                var response = await client.GetAsync("/profile");
+
+                // If the response was successful, return the success message
+                if (response.IsSuccessStatusCode)
+                {
+                    string json = await response.Content.ReadAsStringAsync();
+                    dynamic data = JsonConvert.DeserializeObject(json);
+                    // Define the card data
+                    string email = data.email;
+                    DateTime registartionDate = data.registartionDate;
+
+                    emailTextWin.Header = email;
+                    registerTextWin.Header = "Regisztráció:\n"+registartionDate;
+
+                    }
 
                 else
                 {
@@ -192,7 +251,6 @@ namespace Test
                 Trace.WriteLine($"{response.StatusCode}");
             }
         }
-
         public void newNotePost(string title, string content)
         {
             // create HTTP client instance
@@ -207,6 +265,57 @@ namespace Test
             var json = JsonConvert.SerializeObject(newNote);
             // set the request content to a JSON payload
             request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+            // send HTTP request
+            HttpResponseMessage response = client.SendAsync(request).Result;
+            // check if HTTP response was successful
+            if (response.IsSuccessStatusCode)
+            {
+                Trace.WriteLine($"{response.StatusCode}");
+            }
+            else
+            {
+                Trace.WriteLine($"{response.StatusCode}");
+            }
+        }
+        public void deleteNote(string noteId)
+        {
+            // create HTTP client instance
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Token.accessToken);
+            // create HTTP request message
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Delete, "http://localhost:3000/notes/"+noteId);
+            // send HTTP request
+            HttpResponseMessage response = client.SendAsync(request).Result;
+            // check if HTTP response was successful
+            if (response.IsSuccessStatusCode)
+            {
+                Trace.WriteLine($"{response.StatusCode}");
+            }
+            else
+            {
+                Trace.WriteLine($"{response.StatusCode}");
+            }
+        }
+        
+        //EZ BAD REQUESTET DOB
+        public void editNote(string noteId, string title, string content)
+        {
+            // create HTTP client instance
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Token.accessToken);
+            // create HTTP request message
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Patch, "http://localhost:3000/notes/" + noteId);
+            // create a JSON object with the data to update
+            var updateData = new
+            {
+                title = title,
+                content = content
+            };          
+            var json = JsonConvert.SerializeObject(updateData);
+            // set the request content to a JSON payload
+            request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+            Trace.WriteLine($"{json}");
+            Trace.WriteLine($"{noteId}");
             // send HTTP request
             HttpResponseMessage response = client.SendAsync(request).Result;
             // check if HTTP response was successful

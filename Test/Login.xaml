@@ -5,7 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
-        Title="Login" Height="450" Width="800">
+        Title="Registration" Height="300" Width="545"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -13,18 +21,22 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Please enter your login credentials:" Margin="10"/>
-        <Label Grid.Row="1" Grid.Column="0" Content="Email:" Margin="10"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Name="EmailTextBox" Margin="10"/>
-        <Label Grid.Row="2" Grid.Column="0" Content="Password:" Margin="10"/>
-        <PasswordBox Grid.Row="2" Grid.Column="1" Name="PasswordBox" Margin="10"/>
-        <Button Grid.Row="3" Grid.Column="1" Content="Login" Margin="10" Click="OnLoginButtonClicked"/>
-        <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Name="ErrorMessageTextBlock" Foreground="Red" Margin="10"/>
-        <Button Grid.Row="5" Grid.Column="3" Content="Create your new account" Margin="10" Click="Register"/>
+
+        <Label Grid.Row="0" Content="Login" FontSize="24" HorizontalAlignment="Center" Margin="0,20,0,20"/>
+
+        <Label Grid.Row="2" Content="Email:" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Row="2" x:Name="EmailTextBox" Margin="100,0,20,0"/>
+
+        <Label Grid.Row="3" Content="Password:" VerticalAlignment="Center" Margin="5"/>
+        <PasswordBox Grid.Row="3" x:Name="PasswordBox" Margin="100,0,20,0"/>
+
+        <Button Grid.Row="4" Content="Login" Click="OnLoginButtonClicked" Margin="10"/>
+
+        <Button Grid.Row="5" Content="Create new account" Click="toRegister" Margin="10"/>
+
+
+        <Label Grid.Row="5" x:Name="ResultLabel" FontSize="16" HorizontalAlignment="Center" Margin="0,20,0,20"/>
     </Grid>
 </Window>

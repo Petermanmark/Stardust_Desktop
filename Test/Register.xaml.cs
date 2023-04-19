@@ -17,6 +17,7 @@ namespace Test
         public Register()
         {
             InitializeComponent();
+            this.ResizeMode = ResizeMode.NoResize;
         }
         private void Back(object sender, RoutedEventArgs e)
         {
