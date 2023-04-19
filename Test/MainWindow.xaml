@@ -14,7 +14,7 @@
             </MenuItem>
             <MenuItem Header="_Profil">
                 <MenuItem Header="_Profil" Click="profile"/>
-                <MenuItem Header="_Kijelentkezés" Click="logout"/>
+                <MenuItem Header="_Kijelentkezés" Click="profile"/>
             </MenuItem>
         </Menu>
         <Grid>

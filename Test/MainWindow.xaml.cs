@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -32,6 +33,9 @@ namespace Test
                 string text1 = dialog.textBox1.Text;
                 string text2 = dialog.textBox2.Text;
                 // Do something with the values here
+                newNotePost(text1, text2);
+                stackPanel.Children.Clear();
+                getNotes(stackPanel);
             }
             else
             {
@@ -41,7 +45,7 @@ namespace Test
 
         void newGod(object sender, RoutedEventArgs e)
         {
-            newGod();
+            newGodPost();
             stackPanel.Children.Clear();
             getNotes(stackPanel);
         }
@@ -158,8 +162,6 @@ namespace Test
 
                         card.Child = gridCard;
                         stackPanel.Children.Add(card);
-
-                        Trace.WriteLine("Card added");
                     }
                 }
 
@@ -171,7 +173,7 @@ namespace Test
                 }
             }
         }
-        public void newGod()
+        public void newGodPost()
         {
             // create HTTP client instance
             HttpClient client = new HttpClient();
@@ -182,7 +184,34 @@ namespace Test
             HttpResponseMessage response = client.SendAsync(request).Result;
             // check if HTTP response was successful
             if (response.IsSuccessStatusCode)
-            {               
+            {
+                Trace.WriteLine($"{response.StatusCode}");
+            }
+            else
+            {
+                Trace.WriteLine($"{response.StatusCode}");
+            }
+        }
+
+        public void newNotePost(string title, string content)
+        {
+            // create HTTP client instance
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + Token.accessToken);
+            // create HTTP request message
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:3000/notes/");
+            // Create a JSON object with the username, email, and password
+            NewNote newNote = new NewNote();
+            newNote.title = title;
+            newNote.content = content;
+            var json = JsonConvert.SerializeObject(newNote);
+            // set the request content to a JSON payload
+            request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+            // send HTTP request
+            HttpResponseMessage response = client.SendAsync(request).Result;
+            // check if HTTP response was successful
+            if (response.IsSuccessStatusCode)
+            {
                 Trace.WriteLine($"{response.StatusCode}");
             }
             else
