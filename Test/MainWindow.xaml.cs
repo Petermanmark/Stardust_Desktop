@@ -230,7 +230,7 @@ namespace Test
                     DateTime registartionDate = data.registartionDate;
 
                     emailTextWin.Header = email;
-                    registerTextWin.Header = "Regisztráció:\n" + registartionDate;
+                    registerTextWin.Header = "Registration date:\n" + registartionDate;
 
                 }
 
