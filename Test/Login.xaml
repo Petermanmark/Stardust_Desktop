@@ -40,11 +40,11 @@
             <Label Grid.Row="3" Content="Password:" VerticalAlignment="Center" Margin="5"/>
             <PasswordBox Grid.Row="3" x:Name="PasswordBox" Margin="100,0,20,0"/>
 
-            <Button Grid.Row="4" Content="Login" Click="OnLoginButtonClicked" Margin="10"/>
+            <Button Grid.Row="4" Content="Login" Click="OnLoginButtonClicked" Margin="10" Opacity="100"/>
 
             <Button Grid.Row="5" Content="Create new account" Click="toRegister" Margin="10"/>
 
-            <Button Content="×" Click="closeApp" BorderBrush="Transparent" HorizontalAlignment="Left" Margin="513,6,0,0" Width="26" Height="26" VerticalAlignment="Top" RenderTransformOrigin="0.697,0.5"/>
+            <Button Grid.Row="0" Content="x" Click="closeApp" HorizontalAlignment="Right"  VerticalAlignment="Top" Margin="0,9,10,0" FontSize="10" Background="#00673AB7" />
         </Grid>
     </Border>
 </Window>
