@@ -16,20 +16,29 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen">
-    <DockPanel>
+    <DockPanel HorizontalAlignment="Stretch">
         <Menu DockPanel.Dock="Top">
-            <MenuItem x:Name="emailTextWin" Header="_email" HorizontalAlignment="Left">
+            
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel HorizontalAlignment="Stretch"></DockPanel>
+                </ItemsPanelTemplate>
+
+            </Menu.ItemsPanel>
+            
+            <MenuItem x:Name="emailTextWin" Header="_email">
                 <MenuItem x:Name="registerTextWin" Header="_Register:"/>
                 <MenuItem Header="_Kijelentkezés" Click="logout"/>
             </MenuItem>
-            
-            <MenuItem Header="_Létrehozás" HorizontalAlignment="Left">
+
+            <MenuItem Header="_Létrehozás">
                 <MenuItem Header="_Új jegyzet" Click="newNote"/>
                 <MenuItem Header="_Új generálása" Click="newGod"/>
             </MenuItem>
+
+            <MenuItem x:Name="closeInMenu" Click="closeApp" Header="_×" DockPanel.Dock="Right"/>
+            <MenuItem x:Name="minimalize" Click="minimalizeApp" Header="__" HorizontalAlignment="Right"/>
             
-            <MenuItem x:Name="minimalize" Click="minimalizeApp" Header="__" HorizontalAlignment="Right" Width="Auto"/>
-            <MenuItem x:Name="closeInMenu" Click="closeApp" Header="_×" HorizontalAlignment="Right" Width="Auto"/>
         </Menu>
         <Grid>
             <ScrollViewer>
