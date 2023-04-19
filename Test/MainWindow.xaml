@@ -36,8 +36,8 @@
                 <MenuItem Header="_Új generálása" Click="newGod"/>
             </MenuItem>
 
-            <MenuItem x:Name="closeInMenu" Click="closeApp" Header="_×" DockPanel.Dock="Right"/>
-            <MenuItem x:Name="minimalize" Click="minimalizeApp" Header="__" HorizontalAlignment="Right"/>
+            <MenuItem x:Name="closeInMenu" Click="closeApp" Header="_×" DockPanel.Dock="Right" FontSize="20" FontWeight="Bold"/>
+            <MenuItem x:Name="minimalize" Click="minimalizeApp" Header="__" HorizontalAlignment="Right" FontSize="20" FontWeight="Bold"/>
             
         </Menu>
         <Grid>
