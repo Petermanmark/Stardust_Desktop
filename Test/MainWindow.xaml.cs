@@ -10,6 +10,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media.Effects;
 
 namespace Test
 {
@@ -26,6 +27,7 @@ namespace Test
             getProfile(emailTextWin, registerTextWin);
             getNotes(stackPanel);
         }
+
         private void minimalizeApp(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
@@ -36,8 +38,13 @@ namespace Test
         }
         private void newNote(object sender, RoutedEventArgs e)
         {
-            newNoteDialog dialog = new newNoteDialog();
+            newNoteDialog dialog = new newNoteDialog();   
+            BlurEffect blur = new BlurEffect();
+            blur.Radius = 10;
+            Effect = blur;
+
             bool? result = dialog.ShowDialog();
+
             if (result == true)
             {
                 // The user clicked the "OK" button
@@ -47,10 +54,14 @@ namespace Test
                 newNotePost(text1, text2);
                 stackPanel.Children.Clear();
                 getNotes(stackPanel);
+                // remove blur effect from the window
+                this.Effect = null;
+
             }
             else
             {
-                // The user clicked the "Cancel" button or closed the dialog box
+                // remove blur effect from the window
+                this.Effect = null;
             }
         }
         void newGod(object sender, RoutedEventArgs e)
