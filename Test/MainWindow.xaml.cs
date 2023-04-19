@@ -173,6 +173,11 @@ namespace Test
                             // retrieve the note ID from the Tag property of the button
                             string noteId = (string)((Button)sender).Tag;
                             newNoteDialog dialog = new newNoteDialog();
+                            BlurEffect blur = new BlurEffect();
+                            blur.Radius = 10;
+                            Effect = blur;
+                            dialog.textBox1.Text = title;
+                            dialog.textBox2.Text = content;
                             bool? result = dialog.ShowDialog();
                             if (result == true)
                             {
@@ -183,10 +188,12 @@ namespace Test
                                 editNote(noteId, text1, text2);
                                 stackPanel.Children.Clear();
                                 getNotes(stackPanel);
+                                this.Effect = null;
                             }
                             else
                             {
                                 // The user clicked the "Cancel" button or closed the dialog box
+                                this.Effect = null;
                             }
 
                         }
@@ -317,8 +324,6 @@ namespace Test
                 Trace.WriteLine($"{response.StatusCode}");
             }
         }
-
-        //EZ BAD REQUESTET DOB
         public void editNote(string noteId, string title, string content)
         {
             // create HTTP client instance

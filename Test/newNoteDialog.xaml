@@ -16,9 +16,9 @@
         BorderThickness="2">
     <StackPanel Margin="10">
         <TextBlock Text="Jegyzet Címe:" Margin="10"/>
-        <TextBox x:Name="textBox1" Height="40" Margin="10"/>
+        <TextBox x:Name="textBox1" Height="40" Margin="10" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled"/>
         <TextBlock Text="Jegyzet Tartalma:" Margin="10"/>
-        <TextBox x:Name="textBox2" MinHeight="150" Margin="10"/>
+        <TextBox x:Name="textBox2" Height="150" Margin="10" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Content="OK" Click="OK_Click" Margin="10" Width="100"/>
             <Button Content="Cancel" Click="Cancel_Click" Margin="10" Width="100"/>

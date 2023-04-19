@@ -16,7 +16,6 @@ namespace Test
         {
             string title = textBox1.Text;
             string content = textBox2.Text;
-            // Pass the values back to the parent window here
             this.DialogResult = true;
         }
 
