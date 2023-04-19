@@ -90,7 +90,7 @@ namespace Test
             }
         }
 
-        private async Task<string> PerformUserLogin(string email, string password)
+        private async Task<string>PerformUserLogin(string email, string password)
         {
             // Create an HTTP client object
             using (HttpClient client = new HttpClient())
@@ -115,8 +115,7 @@ namespace Test
                     string jsonString = await response.Content.ReadAsStringAsync();
                     JObject jsonObject = JObject.Parse(jsonString);
                     Token.accessToken = (string)jsonObject["access_token"];
-
-                    return "Login Successful";
+                    return "Login successful";
                 }
                 else
                 {
@@ -127,9 +126,5 @@ namespace Test
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

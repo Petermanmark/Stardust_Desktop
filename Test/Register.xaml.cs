@@ -81,7 +81,7 @@ namespace Test
         }
 
 
-        private async Task<string> PerformUserRegistration(string email, string password)
+        private async Task<string>PerformUserRegistration(string email, string password)
         {
             // Create an HTTP client object
             using (HttpClient client = new HttpClient())
@@ -104,7 +104,7 @@ namespace Test
                 if (response.IsSuccessStatusCode)
                 {
                     var result = await response.Content.ReadAsStringAsync();
-                    return result;
+                    return "Register successful";
                 }
                 else
                 {

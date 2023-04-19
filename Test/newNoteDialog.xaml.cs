@@ -10,6 +10,7 @@ namespace Test
         public newNoteDialog()
         {
             InitializeComponent();
+            this.ResizeMode = ResizeMode.NoResize;
         }
         private void OK_Click(object sender, RoutedEventArgs e)
         {
