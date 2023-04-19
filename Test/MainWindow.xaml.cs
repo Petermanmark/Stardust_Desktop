@@ -21,10 +21,18 @@ namespace Test
         public MainWindow()
         {
             InitializeComponent();
-            //this.WindowState = WindowState.Maximized;
+            this.WindowState = WindowState.Maximized;
             this.ResizeMode = ResizeMode.NoResize;
             getProfile(emailTextWin, registerTextWin);
             getNotes(stackPanel);
+        }
+        private void minimalizeApp(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+        private void closeApp(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
         private void newNote(object sender, RoutedEventArgs e)
         {

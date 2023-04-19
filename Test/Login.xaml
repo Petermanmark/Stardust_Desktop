@@ -11,32 +11,40 @@
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
-        TextOptions.TextRenderingMode="Auto"
-        Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+        TextOptions.TextRenderingMode="Auto"        
+        FontFamily="{DynamicResource MaterialDesignFont}"       
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        xmlns:converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+        xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf">
+    <Border CornerRadius="20">
 
-        <Label Grid.Row="0" Content="Login" FontSize="24" HorizontalAlignment="Center" Margin="0,20,0,20"/>
-
-        <Label Grid.Row="2" Content="Email:" VerticalAlignment="Center" Margin="5"/>
-        <TextBox Grid.Row="2" x:Name="EmailTextBox" Margin="100,0,20,0"/>
-
-        <Label Grid.Row="3" Content="Password:" VerticalAlignment="Center" Margin="5"/>
-        <PasswordBox Grid.Row="3" x:Name="PasswordBox" Margin="100,0,20,0"/>
-
-        <Button Grid.Row="4" Content="Login" Click="OnLoginButtonClicked" Margin="10"/>
-
-        <Button Grid.Row="5" Content="Create new account" Click="toRegister" Margin="10"/>
+        <Grid Background="{DynamicResource MaterialDesignPaper}">
 
 
-        <Label Grid.Row="5" x:Name="ResultLabel" FontSize="16" HorizontalAlignment="Center" Margin="0,20,0,20"/>
-    </Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Content="Login" FontSize="24" HorizontalAlignment="Center" Margin="0,20,0,20"/>
+
+            <Label Grid.Row="2" Content="Email:" VerticalAlignment="Center" Margin="5"/>
+            <TextBox Grid.Row="2" x:Name="EmailTextBox" Margin="100,0,20,0"/>
+
+            <Label Grid.Row="3" Content="Password:" VerticalAlignment="Center" Margin="5"/>
+            <PasswordBox Grid.Row="3" x:Name="PasswordBox" Margin="100,0,20,0"/>
+
+            <Button Grid.Row="4" Content="Login" Click="OnLoginButtonClicked" Margin="10"/>
+
+            <Button Grid.Row="5" Content="Create new account" Click="toRegister" Margin="10"/>
+
+            <Button Content="×" Click="closeApp" BorderBrush="Transparent" HorizontalAlignment="Left" Margin="513,6,0,0" Width="26" Height="26" VerticalAlignment="Top" RenderTransformOrigin="0.697,0.5"/>
+        </Grid>
+    </Border>
 </Window>
