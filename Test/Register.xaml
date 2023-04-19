@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Test"
         mc:Ignorable="d"
-        Title="Registration" Height="300" Width="545"
+        Title="Registration" Height="270" Width="545"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -38,6 +38,6 @@
 
         <Button Grid.Row="5" Content="Back to login phase" Click="Back" Margin="10"/>
 
-        <Button Grid.Row="0" Content="x" Click="closeApp" HorizontalAlignment="Right"  VerticalAlignment="Top" Margin="0,9,10,0" FontSize="10" Background="#00673AB7" />
+        <Button Grid.Row="0" Content="×" Click="closeApp" HorizontalAlignment="Right"  VerticalAlignment="Top" Margin="0,9,10,0" FontSize="25" Background="#00673AB7" BorderBrush="#00673AB7" FontWeight="Bold"/>
     </Grid>
 </Window>
